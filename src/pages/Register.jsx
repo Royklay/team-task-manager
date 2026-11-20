@@ -1,6 +1,7 @@
 
 import AuthForm from "../components/AuthForm";
 import { registerUser } from "../auth/authSlice";
+
 import { useNavigate } from "react-router-dom";
 
 function Register() {

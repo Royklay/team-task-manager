@@ -1,19 +1,32 @@
 
 import AuthForm from "../components/AuthForm";
 import { loginUser } from "../auth/authSlice";
+
+
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function Login() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLogin = (username, email, password) => {
 
-        const success = loginUser(email, password);
+        // Check login credentials
+        const user = loginUser(email, password);
 
-        if (success) {
+        if (user) {
+
+            // Update Redux state
+            dispatch(login({
+                username: user.username,
+                email: user.email
+            }));
+
             alert("Login successful");
             navigate("/dashboard");
+
         } else {
             alert("Invalid email or password");
         }
@@ -25,11 +38,11 @@ function Login() {
                 type="login"
                 onSubmit={handleLogin}
             />
+
             <button onClick={() => navigate("/register")}>
-    Create Account
-</button>
+                Create Account
+            </button>
         </div>
-        
     );
 }
 
