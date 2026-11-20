@@ -10,7 +10,7 @@ function Navbar() {
         <a href="/dashboard">Dashboard</a>
         <a href="/register">Register</a>
         <a href="login">Login</a>
-        <a href="/tasks">My Tasks</a>
+        <a href="/tasks">View Tasks</a>
       </div>
 
       
