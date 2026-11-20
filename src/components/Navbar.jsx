@@ -7,9 +7,9 @@ function Navbar() {
       </div>
 
       <div className="nav-links">
-        <link rel="stylesheet" href="Dashboard" />
-        <link rel="stylesheet" href="Register" />
-        <link rel="stylesheet" href="login" />
+        <link to="Dashboard" />
+        <link to="Register" />
+        <link to="login" />
         
       </div>
 
