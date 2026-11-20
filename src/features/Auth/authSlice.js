@@ -1,57 +1,32 @@
 
+import { createSlice } from "@reduxjs/toolkit";
 
-export function registerUser(username, email, password) {
+const initialState = {
+  user: JSON.parse(localStorage.getItem("user")) || null,
+  isLoggedIn: !!localStorage.getItem("user")
+};
 
-    let users = JSON.parse(localStorage.getItem("users")) || [];
+const authSlice = createSlice({
+  name: "auth",
+  initialState,
 
-    
-    const existingUser = users.find(user => user.email === email);
+  reducers: {
+    login: (state, action) => {
+      state.user = action.payload;
+      state.isLoggedIn = true;
 
-    if (existingUser) {
-        return "User already exists";
+      localStorage.setItem("user", JSON.stringify(action.payload));
+    },
+
+    logout: (state) => {
+      state.user = null;
+      state.isLoggedIn = false;
+
+      localStorage.removeItem("user");
     }
+  }
+});
 
-    const newUser = {
-        username,
-        email,
-        password
-    };
+export const { login, logout } = authSlice.actions;
 
-    users.push(newUser);
-
-    localStorage.setItem("users", JSON.stringify(users));
-
-    return "Registration successful";
-}
-
-
-
-export function loginUser(email, password) {
-
-    let users = JSON.parse(localStorage.getItem("users")) || [];
-
-    const user = users.find(
-        user => user.email === email && user.password === password
-    );
-
-    if (user) {
-        localStorage.setItem("loggedInUser", JSON.stringify(user));
-        return true;
-    }
-
-    return false;
-}
-
-
-export function logoutUser() {
-
-    localStorage.removeItem("loggedInUser");
-
-}
-
-
-export function getCurrentUser() {
-
-    return JSON.parse(localStorage.getItem("loggedInUser"));
-
-}
+export default authSlice.reducer;

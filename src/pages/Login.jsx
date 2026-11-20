@@ -25,7 +25,7 @@ function Login() {
                 type="login"
                 onSubmit={handleLogin}
             />
-            <button onClick={() => navigate("/Register")}>
+            <button onClick={() => navigate("/register")}>
     Create Account
 </button>
         </div>
