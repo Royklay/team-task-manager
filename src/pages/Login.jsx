@@ -1,6 +1,6 @@
 
 import AuthForm from "../components/AuthForm";
-import { loginUser } from "../Auth/Auth";
+import { loginUser } from "../auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
