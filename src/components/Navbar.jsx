@@ -7,10 +7,10 @@ function Navbar() {
       </div>
 
       <div className="nav-links">
-        <a href="/dashboard">Dashboard</a>
-        <a href="/register">Register</a>
-        <a href="login">Login</a>
-        <a href="/tasks">View Tasks</a>
+        <link rel="stylesheet" href="Dashboard" />
+        <link rel="stylesheet" href="Register" />
+        <link rel="stylesheet" href="login" />
+        
       </div>
 
       
