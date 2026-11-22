@@ -1,23 +1,30 @@
-import { link } from "react-router-dom"
+
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+
 function Navbar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const user = useSelector((state) => state.auth.user);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
+
   return (
     <nav className="navbar">
-      <div className="nav-logo">
-        <h2>TaskFlow</h2>
-      </div>
+      <h2>TaskFlow</h2>
 
       <div className="nav-links">
-        <link to="/dashboard" >Dashboard</link>
-        <link to="/register" >Register</link>
-        <link to="/login" >Login</link>
-        
-      </div>
+        <span>{user?.email}</span>
 
-      
-        <button className="logout-btn">
+        <button onClick={handleLogout}>
           Logout
         </button>
-      
+      </div>
     </nav>
   );
 }
