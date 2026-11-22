@@ -1,30 +1,27 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
-// Import our pages
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
-    return (
-        <BrowserRouter>
-            <Routes>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-                {/* Login page */}
-                <Route path="/login" element={<Login />} />
-
-                {/* Registration page */}
-                <Route path="/register" element={<Register />} />
-
-                {/* Dashboard page */}
-                <Route path="/dashboard" element={<Dashboard />} />
-
-                {/* Redirect the homepage to login */}
-                <Route path="/" element={<Navigate to="/login" />} />
-
-            </Routes>
-        </BrowserRouter>
-    );
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
