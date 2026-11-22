@@ -1,57 +1,54 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTask } from "../features/tasks/taskSlice";
 
-const initialState = {
-  tasks: [],
-};
+function TaskForm() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
-const taskSlice = createSlice({
-  name: "tasks",
-  initialState,
+  const dispatch = useDispatch();
 
-  reducers: {
-    // Add a new task
-    addTask: (state, action) => {
-      state.tasks.push(action.payload);
-    },
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    // Delete a task
-    deleteTask: (state, action) => {
-      state.tasks = state.tasks.filter(
-        (task) => task.id !== action.payload
-      );
-    },
+    if (!title.trim()) {
+      alert("Please enter a task title");
+      return;
+    }
 
-    // Edit a task
-    editTask: (state, action) => {
-      const task = state.tasks.find(
-        (task) => task.id === action.payload.id
-      );
+    const newTask = {
+      id: Date.now(),
+      title: title.trim(),
+      description: description.trim(),
+      status: "Pending",
+    };
 
-      if (task) {
-        task.title = action.payload.title;
-        task.description = action.payload.description;
-      }
-    },
+    dispatch(addTask(newTask));
 
-    // Change task status
-    toggleTaskStatus: (state, action) => {
-      const task = state.tasks.find(
-        (task) => task.id === action.payload
-      );
+    setTitle("");
+    setDescription("");
+  };
 
-      if (task) {
-        task.status =
-          task.status === "Pending" ? "Completed" : "Pending";
-      }
-    },
-  },
-});
+  return (
+    <form className="task-form" onSubmit={handleSubmit}>
+      <h2>Add New Task</h2>
 
-export const {
-  addTask,
-  deleteTask,
-  editTask,
-  toggleTaskStatus,
-} = taskSlice.actions;
+      <input
+        type="text"
+        placeholder="Task title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
 
-export default taskSlice.reducer;
+      <textarea
+        placeholder="Task description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+
+      <button type="submit">Add Task</button>
+    </form>
+  );
+}
+
+export default TaskForm;
