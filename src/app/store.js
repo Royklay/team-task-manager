@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "../features/auth/authSlice";
+import taskReducer from "../features/tasks/taskSlice";
 
-// Create our central Redux store
 export const store = configureStore({
-    reducer: {
-        // Our authentication and task reducers
-        // will be added here 
-    },
+  reducer: {
+    auth: authReducer,
+    tasks: taskReducer,
+  },
 });
