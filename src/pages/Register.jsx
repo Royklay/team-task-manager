@@ -1,37 +1,56 @@
-<div className="flex min-h-screen items-center justify-center p-5">
 
-  <div className="w-full max-w-[400px] rounded-xl bg-white p-6 shadow-md">
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../features/auth/authSlice";
+import { Link, useNavigate } from "react-router-dom";
 
-    <h1 className="mb-3 text-3xl font-bold text-[#198754]">
-      Login
-    </h1>
+function Register() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    <p className="my-4 text-gray-600">
-      Welcome back! Please login to continue.
-    </p>
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    <input
-      type="email"
-      placeholder="Email address"
-      className="mb-3 w-full rounded-md border border-gray-300 p-3 focus:border-[#198754] focus:outline-none"
-    />
+  const handleRegister = (e) => {
+    e.preventDefault();
 
-    <input
-      type="password"
-      placeholder="Password"
-      className="mb-4 w-full rounded-md border border-gray-300 p-3 focus:border-[#198754] focus:outline-none"
-    />
+    if (!email || !password) {
+      alert("Please fill in all fields");
+      return;
+    }
 
-    <button className="w-full rounded-md bg-[#198754] p-3 text-white hover:bg-[#146c43]">
-      Login
-    </button>
+    dispatch(login({ email }));
+    navigate("/dashboard");
+  };
 
-    <p className="mt-4 text-center">
-      Don't have an account?
-      <a href="/register" className="ml-1 text-[#198754] underline">
-        Register
-      </a>
-    </p>
+  return (
+    <div className="auth-container">
+      <form className="auth-form" onSubmit={handleRegister}>
+        <h1>Create Account</h1>
+        <p>Join TaskFlow today</p>
 
-  </div>
-</div>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button type="submit">Register</button>
+
+        <p>
+          Already have an account? <Link to="/">Login</Link>
+        </p>
+      </form>
+    </div>
+  );
+}
+
+export default Register;
