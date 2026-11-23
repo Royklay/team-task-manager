@@ -59,7 +59,6 @@ The project uses Redux Toolkit for centralized state management and React Router
 | React Router DOM | Application navigation and protected routes |
 | HTML5 | Application structure |
 | CSS3 | Styling and responsive design |
-| LocalStorage | Persisting user and application data |
 | Git & GitHub | Version control and team collaboration |
 | Vite | Development server and build tool |
 
