@@ -21,9 +21,7 @@ function Navbar() {
       <div className="nav-links">
         <span>{user?.email}</span>
 
-        <button onClick={handleLogout}>
-          Logout
-        </button>
+        
         <button onClick={handleLogout}>Logout</button>
       </div>
     </nav>
