@@ -1,3 +1,4 @@
+
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +21,9 @@ function Navbar() {
       <div className="nav-links">
         <span>{user?.email}</span>
 
+        <button onClick={handleLogout}>
+          Logout
+        </button>
         <button onClick={handleLogout}>Logout</button>
       </div>
     </nav>
