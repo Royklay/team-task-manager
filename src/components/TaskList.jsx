@@ -1,16 +1,35 @@
-<div className="my-6 grid grid-cols-1 gap-5 sm:grid-cols-3">
-  <div className="rounded-xl bg-white p-5 shadow-md">
-    <h2 className="mb-2 text-xl font-bold text-[#198754]">Total Tasks</h2>
-    <p className="text-2xl font-bold">20</p>
-  </div>
 
-  <div className="rounded-xl bg-white p-5 shadow-md">
-    <h2 className="mb-2 text-xl font-bold text-[#198754]">Completed</h2>
-    <p className="text-2xl font-bold">12</p>
-  </div>
+import { useSelector, useDispatch } from "react-redux";
+import { useCallback } from "react";
+import { deleteTask } from "../features/tasks/taskSlice";
+import TaskItem from "./TaskItem";
 
-  <div className="rounded-xl bg-white p-5 shadow-md">
-    <h2 className="mb-2 text-xl font-bold text-[#198754]">Pending</h2>
-    <p className="text-2xl font-bold">8</p>
-  </div>
-</div>;
+function TaskList() {
+  const tasks = useSelector((state) => state.tasks.tasks);
+  const dispatch = useDispatch();
+
+  // Delete a task
+  const handleDelete = useCallback((id) => {
+    dispatch(deleteTask(id));
+  }, [dispatch]);
+
+  return (
+    <div>
+      <h2>Task List</h2>
+
+      {tasks.length === 0 ? (
+        <p>No tasks available.</p>
+      ) : (
+        tasks.map((task) => (
+          <TaskItem
+            key={task.id}
+            task={task}
+            onDelete={handleDelete}
+          />
+        ))
+      )}
+    </div>
+  );
+}
+
+export default TaskList;
