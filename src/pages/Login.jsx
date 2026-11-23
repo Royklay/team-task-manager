@@ -1,32 +1,61 @@
-<div className="flex min-h-screen items-center justify-center p-5">
-  <div className="w-full max-w-[400px] rounded-xl bg-white p-6 shadow-md">
-    <h1 className="mb-3 text-3xl font-bold text-[#198754]">Login</h1>
 
-    <p className="my-4 text-gray-600">
-      Welcome back! Please login to continue.
-    </p>
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { login } from "../features/auth/authSlice";
 
-    <input
-      type="email"
-      placeholder="Email address"
-      className="mb-3 w-full rounded-md border border-gray-300 p-3 focus:border-[#198754] focus:outline-none"
-    />
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    <input
-      type="password"
-      placeholder="Password"
-      className="mb-4 w-full rounded-md border border-gray-300 p-3 focus:border-[#198754] focus:outline-none"
-    />
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    <button className="w-full rounded-md bg-[#198754] p-3 text-white hover:bg-[#146c43]">
-      Login
-    </button>
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    <p className="mt-4 text-center">
-      Don't have an account?
-      <a href="/register" className="ml-1 text-[#198754] underline">
-        Register
-      </a>
-    </p>
-  </div>
-</div>;
+    if (!email.trim() || !password.trim()) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    dispatch(
+      login({
+        email: email.trim(),
+      })
+    );
+
+    navigate("/dashboard");
+  };
+
+  return (
+    <div className="auth-container">
+      <form className="auth-form" onSubmit={handleSubmit}>
+        <h1>Welcome Back</h1>
+        <p>Login to manage your tasks</p>
+
+        <input
+          type="email"
+          placeholder="Email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button type="submit">Login</button>
+
+        <p>
+          Don't have an account? <Link to="/register">Register</Link>
+        </p>
+      </form>
+    </div>
+  );
+}
+
+export default Login;
