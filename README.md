@@ -59,7 +59,6 @@ The project uses Redux Toolkit for centralized state management and React Router
 | React Router DOM | Application navigation and protected routes |
 | HTML5 | Application structure |
 | CSS3 | Styling and responsive design |
-| LocalStorage | Persisting user and application data |
 | Git & GitHub | Version control and team collaboration |
 | Vite | Development server and build tool |
 
@@ -274,9 +273,16 @@ The recommended workflow is:
 Developed collaboratively as a team project to demonstrate practical skills in React development, Redux state management, authentication, routing, and GitHub collaboration.
 
 **Team Members:**
+## Contributors
 
-- Contributor 1 – [Muhammed](https://github.com/mudezmahmoud-netizen)
-- Contributor 2 – [Brian](https://github.com/brain131/E-library2)
-- Contributor 3 – [Thomas](https://github.com/thomaskamau7588-star)
-- Contributor 4 – [David](https://github.com/macklenton)
-- Contributor 5 – [Roy](https://github.com/Royklay)
+This project was collaboratively developed by a team of five members using Git and GitHub for version control, branch management, and collaboration.
+
+| Team Member | Contribution | GitHub Branch |
+|---|---|---|
+| Thomas | CRUD Operations | [feature/crud](https://github.com/Royklay/team-task-manager/tree/feature/crud) |
+| Muhammed | UI Styling | [feature/styling](https://github.com/Royklay/team-task-manager/tree/feature/styling) |
+| Brian | Authentication | [authentication](https://github.com/Royklay/team-task-manager/tree/authentication) |
+| Roy | Project Setup, Redux Store and Integration | [main](https://github.com/Royklay/team-task-manager/tree/main) |
+| David | Performance Optimization and CSS Styling | [feature/Performance](https://github.com/Royklay/team-task-manager/tree/feature/Performance) |
+
+**Repository:** [Team Task Manager – GitHub](https://github.com/Royklay/team-task-manager)
